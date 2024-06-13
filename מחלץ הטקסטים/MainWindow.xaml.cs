@@ -1,6 +1,7 @@
 ﻿using Docnet.Core;
 using Docnet.Core.Models;
 using Microsoft.Win32;
+using sun.swing;
 using System;
 using System.Collections.Concurrent;
 using System.IO;
@@ -35,6 +36,7 @@ namespace מחלץ_הטקסטים
                     string directory = Path.GetDirectoryName(fileName);
                     string newTextFileName = Path.Combine(directory, Path.GetFileNameWithoutExtension(fileName) + ".txt");
                     string content = await Task.Run(() => GetFileContent(fileName));
+                    if (string.IsNullOrEmpty(content)) { content = TikaTectExtractor(fileName); }
                     File.WriteAllText(newTextFileName, content);
                     System.Diagnostics.Process.Start(newTextFileName);
                 }
@@ -60,7 +62,15 @@ namespace מחלץ_הטקסטים
                     return Toxy.ParserFactory.CreateText(new Toxy.ParserContext(filePath)).Parse();
                 }
             }
-            catch (System.NotSupportedException)
+            catch
+            {
+                return string.Empty;
+            }
+        }
+
+        string TikaTectExtractor(string filePath)
+        {
+            try
             {
                 var textExtractor = new TikaOnDotNet.TextExtraction.TextExtractor();
                 var result = textExtractor.Extract(filePath);
@@ -69,7 +79,7 @@ namespace מחלץ_הטקסטים
             catch
             {
                 return string.Empty;
-            }
+            }         
         }
 
 
