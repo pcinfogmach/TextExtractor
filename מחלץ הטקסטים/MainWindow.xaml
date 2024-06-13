@@ -1,0 +1,25 @@
+﻿<Window x:Class="מחלץ_הטקסטים.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:מחלץ_הטקסטים"
+               mc:Ignorable="d"
+        FlowDirection="RightToLeft"
+        SizeToContent="WidthAndHeight">
+    <StackPanel Margin="5">
+
+        <Button Content="בחר קובץ" Margin="5" Click="Button_Click"/>
+
+        <TextBlock Text="תוכנה זו מחלצת את התוכן של כל סוגי הקבצים. התוכן יישמר בתיקיית המקור כקובץ טקסט"
+                   Margin="5"
+                   TextWrapping="WrapWithOverflow" 
+                   Width="150" 
+                   TextAlignment="Justify"/>
+        <ProgressBar x:Name="progressBar" 
+                     Height="5" 
+                     Background="{x:Null}"
+                     BorderThickness="0"/>
+    </StackPanel>
+</Window>
+
